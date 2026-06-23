@@ -1,0 +1,44 @@
+.todo-panel {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.todo-header {
+  background:
+    linear-gradient(135deg, rgba(13, 110, 253, 0.1), rgba(25, 135, 84, 0.1)),
+    #ffffff;
+}
+
+.task-summary {
+  background-color: #f8fafc;
+  color: #475569;
+}
+
+.task-title {
+  font-size: 1rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.task-title.completed {
+  color: #6c757d;
+  text-decoration: line-through;
+}
+
+.empty-state {
+  background-color: #f8fafc;
+}
+
+.btn {
+  min-width: 72px;
+}
+
+@media (max-width: 575.98px) {
+  .todo-panel {
+    border-radius: 0;
+  }
+
+  .btn {
+    min-width: 88px;
+  }
+}

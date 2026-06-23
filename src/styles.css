@@ -1,0 +1,13 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(135deg, rgba(18, 92, 107, 0.08), rgba(168, 83, 47, 0.1)),
+    #f7f8fa;
+  color: #1f2937;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.app-shell {
+  min-height: 100vh;
+}

@@ -1,0 +1,112 @@
+<main class="app-shell d-flex align-items-center py-4">
+  <section class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8 col-xl-7">
+        <div class="todo-panel bg-white border shadow-sm">
+          <div class="todo-header p-4 p-md-5">
+            <p class="text-uppercase text-muted small fw-bold mb-2">Angular 18 beginner project</p>
+            <h1 class="h2 fw-bold mb-2">To-Do List</h1>
+            <p class="text-secondary mb-0">Add, edit, complete, and delete tasks. Your list is saved in Local Storage.</p>
+          </div>
+
+          <div class="px-4 px-md-5 pb-4">
+            <form class="d-flex flex-column flex-sm-row gap-2" (ngSubmit)="addTask()">
+              <input
+                class="form-control form-control-lg"
+                type="text"
+                name="newTaskTitle"
+                placeholder="Enter a new task"
+                [(ngModel)]="newTaskTitle"
+                aria-label="New task title"
+              >
+              <button class="btn btn-primary btn-lg px-4" type="submit">Add</button>
+            </form>
+
+            <div *ngIf="message" class="alert alert-info mt-3 mb-0" role="status">
+              {{ message }}
+            </div>
+          </div>
+
+          <div class="task-summary d-flex flex-column flex-sm-row justify-content-between gap-2 px-4 px-md-5 py-3 border-top border-bottom">
+            <span>Total tasks: <strong>{{ tasks.length }}</strong></span>
+            <span>Completed: <strong>{{ completedCount }}</strong></span>
+          </div>
+
+          <div class="p-4 p-md-5">
+            <div *ngIf="tasks.length === 0" class="empty-state text-center border rounded-3 p-4">
+              <h2 class="h5 mb-2">No tasks yet</h2>
+              <p class="text-secondary mb-0">Add your first task above to get started.</p>
+            </div>
+
+            <ul *ngIf="tasks.length > 0" class="list-group list-group-flush">
+              <li *ngFor="let task of tasks" class="list-group-item px-0 py-3">
+                <div class="d-flex flex-column flex-md-row align-items-md-center gap-3">
+                  <div class="form-check flex-grow-1 mb-0" *ngIf="!task.editing">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      [id]="'task-' + task.id"
+                      [checked]="task.completed"
+                      (change)="toggleCompleted(task)"
+                    >
+                    <label
+                      class="form-check-label task-title"
+                      [class.completed]="task.completed"
+                      [for]="'task-' + task.id"
+                    >
+                      {{ task.title }}
+                    </label>
+                  </div>
+
+                  <div class="flex-grow-1" *ngIf="task.editing">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="editTitle"
+                      [(ngModel)]="editTitle"
+                      aria-label="Edit task title"
+                    >
+                  </div>
+
+                  <div class="d-flex gap-2 justify-content-end">
+                    <button
+                      *ngIf="!task.editing"
+                      class="btn btn-outline-secondary btn-sm"
+                      type="button"
+                      (click)="startEdit(task)"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      *ngIf="task.editing"
+                      class="btn btn-success btn-sm"
+                      type="button"
+                      (click)="saveEdit(task)"
+                    >
+                      Save
+                    </button>
+                    <button
+                      *ngIf="task.editing"
+                      class="btn btn-outline-secondary btn-sm"
+                      type="button"
+                      (click)="cancelEdit(task)"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      class="btn btn-outline-danger btn-sm"
+                      type="button"
+                      (click)="deleteTask(task.id)"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
